@@ -18,6 +18,8 @@ class PlayState extends FlxState
 	public var monsterWarning:Bool = false;
 	public var monsterWarningSpr:FlxSprite;
 
+	public var monsterAttacking:Bool = false;
+
 	public var monsterLeftX:Float = 0;
 	public var monsterRightX:Float = 0;
 
@@ -71,26 +73,31 @@ class PlayState extends FlxState
 			overlay.alpha = (overlay.alpha == 0.8) ? 0.2 : 0.8;
 		#end
 
-		if (monsterCOOLDOWN > 0)
+		if (monsterCOOLDOWN > 0 && !monsterAttacking)
 		{
 			monsterCOOLDOWN -= 1;
 		}
-		else
+		else if (!monsterAttacking)
 		{
-			new FlxTimer().start(FlxG.random.float(0.1), function(t)
+			monsterAttacking = true;
+			monsterWarning = true;
+			new FlxTimer().start(FlxG.random.float(2, 4), function(t)
 			{
-				monsterWarning = true;
+				monsterWarning = false;
 				randomMonsterMood();
 
 				setMonsterPos();
-				FlxTween.tween(monster, {x: (monster.flipX) ? monsterRightX : monsterLeftX}, FlxG.random.float(0.1, 0.5), {
+				FlxTween.tween(monster, {x: (monster.flipX) ? monsterRightX : monsterLeftX}, FlxG.random.float(1, 3), {
 					onComplete: function(t)
 					{
 						monster.flipX = !monster.flipX;
+						randomMonsterMood();
+						monsterAttacking = false;
 					}
 				});
 			});
 		}
+		FlxG.watch.addQuick('monsterCOOLDOWN', monsterCOOLDOWN);
 
 		monsterWarningSpr.visible = monsterWarning;
 	}
@@ -98,7 +105,7 @@ class PlayState extends FlxState
 	public function setMonsterPos()
 	{
 		monster.screenCenter(Y);
-		monster.y += monster.height * 0.75;
+		monster.y += monster.height * 0.25;
 		if (monster.flipX)
 			monster.x = monsterLeftX;
 		else
