@@ -127,6 +127,14 @@ class PlayState extends FlxState
 			dudeSameSpotVinwet.alpha = 0.25 * (dudeSameSpotTimer.elapsedTime / dudeSameSpotTimer.time);
 		else
 			dudeSameSpotVinwet.alpha = 0;
+
+		if (monsterAttacking)
+		{
+			if (monster.overlaps(dude) && dude.animation.name == 'pray')
+			{
+				trace('u have been diddy touched');
+			}
+		}
 	}
 
 	public function setMonsterPos()
