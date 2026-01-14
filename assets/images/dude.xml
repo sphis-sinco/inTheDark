@@ -3,4 +3,5 @@
 	<!-- Created with Adobe Animate version 21.0.6.41649 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="dude idle0000" x="4" y="4" width="473" height="392"/>
+	<SubTexture name="dude pray0000" x="485" y="4" width="261" height="414"/>
 </TextureAtlas>

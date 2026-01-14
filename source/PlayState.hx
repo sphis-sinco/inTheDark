@@ -100,6 +100,15 @@ class PlayState extends FlxState
 		FlxG.watch.addQuick('monsterCOOLDOWN', monsterCOOLDOWN);
 
 		monsterWarningSpr.visible = monsterWarning;
+
+		if (FlxG.keys.justReleased.SPACE)
+		{
+			dude.flashlight.visible = !dude.flashlight.visible;
+
+			dude.animation.play('idle');
+			if (!dude.flashlight.visible)
+				dude.animation.play('pray');
+		}
 	}
 
 	public function setMonsterPos()
