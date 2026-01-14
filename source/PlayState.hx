@@ -1,5 +1,7 @@
 package;
 
+import flixel.math.FlxMath;
+import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
@@ -25,6 +27,10 @@ class PlayState extends FlxState
 
 	public var monsterLeftX:Float = 0;
 	public var monsterRightX:Float = 0;
+
+	public var timeSurvived:Int = 0;
+	public var timeSurvivedTimer:FlxTimer = new FlxTimer();
+	public var timeSurvivedText:FlxText;
 
 	public var overlay:FlxSprite;
 
@@ -62,6 +68,24 @@ class PlayState extends FlxState
 
 		dudeSameSpotVinwet = new FlxSprite(0, 0, 'move'.png());
 		add(dudeSameSpotVinwet);
+
+		timeSurvivedText = new FlxText(0, 4, 0, '');
+		add(timeSurvivedText);
+
+		timeSurvivedTimer.start(1, function(t)
+		{
+			timeSurvived++;
+			
+			timeSurvivedText.text = '$timeSurvived';
+			if (timeSurvived > 60 * 60 * 24)
+				timeSurvivedText.text = '${FlxMath.roundDecimal(((timeSurvived / 60) / 60) / 24, 2)} days...';
+			else if (timeSurvived > 60 * 60)
+				timeSurvivedText.text = '${FlxMath.roundDecimal((timeSurvived / 60) / 60, 2)}h';
+			else if (timeSurvived > 60)
+				timeSurvivedText.text = '${FlxMath.roundDecimal(timeSurvived / 60, 2)}m';
+			else
+				timeSurvivedText.text = '${timeSurvived}s';
+		}, 0);
 	}
 
 	public function randomMonsterMood()
@@ -73,6 +97,8 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		timeSurvivedText.screenCenter(X);
 
 		#if debug
 		if (FlxG.keys.justReleased.R)
