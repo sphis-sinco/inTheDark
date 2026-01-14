@@ -13,8 +13,10 @@ class Dude extends FlxSprite
 		frames = 'dude'.sparrow();
 		animation.addByPrefix('idle', 'dude idle', 16);
 		animation.play('idle');
+		updateHitbox();
 
 		flashlight = new FlxSprite(0, 0, 'flashlightFX'.png());
+		flashlight.alpha = 0.25;
 	}
 
 	override function update(elapsed:Float)
@@ -22,10 +24,10 @@ class Dude extends FlxSprite
 		super.update(elapsed);
 
 		flashlight.setPosition(this.getGraphicMidpoint().x, this.getGraphicMidpoint().y);
-        if (animation.name == 'idle')
-        {
-            flashlight.x += flashlightOffsetIDLE.x;
-            flashlight.y += flashlightOffsetIDLE.y;
-        }
+		if (animation.name == 'idle')
+		{
+			flashlight.x += flashlightOffsetIDLE.x;
+			flashlight.y += flashlightOffsetIDLE.y;
+		}
 	}
 }
