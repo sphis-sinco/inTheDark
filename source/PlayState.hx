@@ -8,6 +8,7 @@ import flixel.FlxState;
 class PlayState extends FlxState
 {
 	public var dude:Dude;
+	public var overlay:FlxSprite;
 
 	override public function create()
 	{
@@ -21,11 +22,18 @@ class PlayState extends FlxState
 		dude.screenCenter();
 		dude.y += dude.height * 0.65;
 
-		add(new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(0,0,0,Std.int(255 / 0.8))));
+		overlay = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		overlay.alpha = 0.8;
+		add(overlay);
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		#if debug
+		if (FlxG.keys.justReleased.R)
+			overlay.alpha = (overlay.alpha == 0.8) ? 0.2 : 0.8; 
+		#end
 	}
 }
