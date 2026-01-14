@@ -11,6 +11,8 @@ class PlayState extends FlxState
 {
 	public var dude:Dude;
 
+	public var dudeSameSpotTimer:FlxTimer = new FlxTimer();
+
 	public var monster:FlxSprite;
 
 	public var monsterCOOLDOWN:Int = 0;
@@ -106,8 +108,14 @@ class PlayState extends FlxState
 			dude.flashlight.visible = !dude.flashlight.visible;
 
 			dude.animation.play('idle');
+			dudeSameSpotTimer.cancel();
 			if (!dude.flashlight.visible)
+			{
 				dude.animation.play('pray');
+				dudeSameSpotTimer.start(17, function(t) {
+					trace('u will die');
+				});
+			}
 		}
 	}
 
