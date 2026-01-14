@@ -11,6 +11,7 @@ class PlayState extends FlxState
 {
 	public var dude:Dude;
 
+	public var dudeSameSpotVinwet:FlxSprite;
 	public var dudeSameSpotTimer:FlxTimer = new FlxTimer();
 
 	public var monster:FlxSprite;
@@ -58,6 +59,9 @@ class PlayState extends FlxState
 		monsterWarningSpr.screenCenter();
 		add(monsterWarningSpr);
 		monsterWarningSpr.visible = false;
+
+		dudeSameSpotVinwet = new FlxSprite(0, 0, 'move'.png());
+		add(dudeSameSpotVinwet);
 	}
 
 	public function randomMonsterMood()
@@ -112,11 +116,17 @@ class PlayState extends FlxState
 			if (!dude.flashlight.visible)
 			{
 				dude.animation.play('pray');
-				dudeSameSpotTimer.start(17, function(t) {
+				dudeSameSpotTimer.start(17, function(t)
+				{
 					trace('u will die');
 				});
 			}
 		}
+
+		if (dudeSameSpotTimer.active)
+			dudeSameSpotVinwet.alpha = 0.25 * (dudeSameSpotTimer.elapsedTime / dudeSameSpotTimer.time);
+		else
+			dudeSameSpotVinwet.alpha = 0;
 	}
 
 	public function setMonsterPos()
