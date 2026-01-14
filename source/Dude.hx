@@ -4,7 +4,7 @@ import flixel.FlxSprite;
 class Dude extends FlxSprite
 {
 	public var flashlight:FlxSprite;
-	public var flashlightOffsetIDLE:FlxPoint = new FlxPoint();
+	public var flashlightOffsetIDLE:FlxPoint = new FlxPoint(215, -350);
 
 	override public function new()
 	{
@@ -24,8 +24,8 @@ class Dude extends FlxSprite
 		flashlight.setPosition(this.getGraphicMidpoint().x, this.getGraphicMidpoint().y);
         if (animation.name == 'idle')
         {
-            flashlight.x + flashlightOffsetIDLE.x;
-            flashlight.y + flashlightOffsetIDLE.y;
+            flashlight.x += flashlightOffsetIDLE.x;
+            flashlight.y += flashlightOffsetIDLE.y;
         }
 	}
 }
