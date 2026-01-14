@@ -11,6 +11,7 @@ class PlayState extends FlxState
 		super.create();
 
 		dude = new Dude();
+		add(dude.flashlight);
 		add(dude);
 		dude.screenCenter();
 	}
