@@ -150,6 +150,7 @@ class PlayState extends FlxState
 				{
 					timeSurvivedTimer.cancel();
 					trace('u will die');
+					FlxG.switchState(() -> new Gameover('still'));
 				});
 			}
 		}
@@ -165,6 +166,7 @@ class PlayState extends FlxState
 			{
 				trace('u have been diddy touched');
 				timeSurvivedTimer.cancel();
+				FlxG.switchState(() -> new Gameover('caught'));
 			}
 		}
 

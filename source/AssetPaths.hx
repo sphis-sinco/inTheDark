@@ -10,4 +10,7 @@ class AssetPaths
 
 	public static inline function sparrow(file:String):FlxAtlasFrames
 		return FlxAtlasFrames.fromSparrow(file.png(), 'images/$file'.xml());
+
+	public static inline function wav(file:String):String
+		return 'assets/sounds/$file.wav';
 }
