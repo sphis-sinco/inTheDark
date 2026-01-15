@@ -80,6 +80,8 @@ class PlayState extends FlxState
 		}, 0);
 
 		updateTimeText();
+
+		FlxG.mouse.visible = false;
 	}
 
 	public function randomMonsterMood()
