@@ -165,7 +165,7 @@ class PlayState extends FlxState
 
 		if (monsterAttacking)
 		{
-			if (monster.overlaps(dude) && dude.animation.name == 'pray')
+			if (monster.overlaps(dude) && dude.animation.name != 'pray')
 			{
 				trace('u have been diddy touched');
 			}
