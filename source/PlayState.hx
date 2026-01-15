@@ -69,29 +69,36 @@ class PlayState extends FlxState
 		dudeSameSpotVinwet = new FlxSprite(0, 0, 'move'.png());
 		add(dudeSameSpotVinwet);
 
-		timeSurvivedText = new FlxText(0, 4, 0, '');
+		timeSurvivedText = new FlxText(0, 4, 0, '', 16);
 		add(timeSurvivedText);
 
 		timeSurvivedTimer.start(1, function(t)
 		{
 			timeSurvived++;
-			
-			timeSurvivedText.text = '$timeSurvived';
-			if (timeSurvived > 60 * 60 * 24)
-				timeSurvivedText.text = '${FlxMath.roundDecimal(((timeSurvived / 60) / 60) / 24, 2)} days...';
-			else if (timeSurvived > 60 * 60)
-				timeSurvivedText.text = '${FlxMath.roundDecimal((timeSurvived / 60) / 60, 2)}h';
-			else if (timeSurvived > 60)
-				timeSurvivedText.text = '${FlxMath.roundDecimal(timeSurvived / 60, 2)}m';
-			else
-				timeSurvivedText.text = '${timeSurvived}s';
+
+			updateTimeText();
 		}, 0);
+
+		updateTimeText();
 	}
 
 	public function randomMonsterMood()
 	{
 		monsterWarning = false;
 		monsterCOOLDOWN = FlxG.random.int(150, 3000);
+	}
+
+	public function updateTimeText()
+	{
+		timeSurvivedText.text = '$timeSurvived';
+		if (timeSurvived > 60 * 60 * 24)
+			timeSurvivedText.text = '${FlxMath.roundDecimal(((timeSurvived / 60) / 60) / 24, 2)} days...';
+		else if (timeSurvived > 60 * 60)
+			timeSurvivedText.text = '${FlxMath.roundDecimal((timeSurvived / 60) / 60, 2)}h';
+		else if (timeSurvived > 60)
+			timeSurvivedText.text = '${FlxMath.roundDecimal(timeSurvived / 60, 2)}m';
+		else
+			timeSurvivedText.text = '${timeSurvived}s';
 	}
 
 	override public function update(elapsed:Float)
