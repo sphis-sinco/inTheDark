@@ -129,6 +129,11 @@ class PlayState extends FlxState
 						monster.flipX = !monster.flipX;
 						randomMonsterMood();
 						monsterAttacking = false;
+					},
+					onUpdate: function(t)
+					{
+						if (FlxG.random.bool(10))
+							FlxG.sound.play('monstete'.wav());
 					}
 				});
 			});
