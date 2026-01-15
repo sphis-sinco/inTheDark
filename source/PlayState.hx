@@ -109,11 +109,6 @@ class PlayState extends FlxState
 
 		timeSurvivedText.screenCenter(X);
 
-		#if debug
-		if (FlxG.keys.justReleased.R)
-			overlay.alpha = (overlay.alpha == 0.8) ? 0.2 : 0.8;
-		#end
-
 		if (monsterCOOLDOWN > 0 && !monsterAttacking)
 		{
 			monsterCOOLDOWN -= 1;
@@ -172,6 +167,14 @@ class PlayState extends FlxState
 				timeSurvivedTimer.cancel();
 			}
 		}
+
+		if (dude.flashlight.visible)
+			overlay.alpha -= FlxG.random.float(0.1, 0.2);
+		if (overlay.alpha != 0.8)
+			if (overlay.alpha > 0.8)
+				overlay.alpha += FlxG.random.float(0.1, 0.2);
+			else
+				overlay.alpha -= FlxG.random.float(0.1, 0.2);
 	}
 
 	public function setMonsterPos()
