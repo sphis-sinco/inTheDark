@@ -153,6 +153,7 @@ class PlayState extends FlxState
 				dude.animation.play('pray');
 				dudeSameSpotTimer.start(17, function(t)
 				{
+					timeSurvivedTimer.cancel();
 					trace('u will die');
 				});
 			}
@@ -168,6 +169,7 @@ class PlayState extends FlxState
 			if (monster.overlaps(dude) && dude.animation.name != 'pray')
 			{
 				trace('u have been diddy touched');
+				timeSurvivedTimer.cancel();
 			}
 		}
 	}
