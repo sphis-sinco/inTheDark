@@ -169,12 +169,18 @@ class PlayState extends FlxState
 		}
 
 		if (dude.flashlight.visible)
-			overlay.alpha -= FlxG.random.float(0.1, 0.2);
+		{
+			if (FlxG.random.bool(25))
+				overlay.alpha -= FlxG.random.float(0.01, 0.1);
+		}
+		else
+			overlay.alpha = 0.8;
+
 		if (overlay.alpha != 0.8)
-			if (overlay.alpha > 0.8)
-				overlay.alpha += FlxG.random.float(0.1, 0.2);
-			else
-				overlay.alpha -= FlxG.random.float(0.1, 0.2);
+			if (overlay.alpha < 0.8)
+				overlay.alpha += FlxG.random.float(0.001, 0.1);
+			else if (overlay.alpha > 0.8)
+				overlay.alpha -= FlxG.random.float(0.001, 0.1);
 	}
 
 	public function setMonsterPos()
